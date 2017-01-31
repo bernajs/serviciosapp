@@ -1,0 +1,151 @@
+<!--<?php
+include_once("_inc/inc.head.php");
+$data = NULL;
+require_once("admin/_class/class.negocio.php");
+require_once("admin/_class/class.zona.php");
+require_once("admin/_class/class.servicio.php");
+require_once("admin/_class/class.testimonio.php");
+require_once("admin/_class/class.usuario.php");
+$obj = new Negocio();
+$id = $_GET['id'];
+$negocios = $obj->getNegocios($id);
+
+$data['nombre'] = $negocios[0]['nombre'];
+$data['zona'] = $negocios[0]['zona'];
+$data['servicio'] = $negocios[0]['servicio'];
+
+// Verifica si el negocio esta guardado como favorito
+$objUsuario = new Usuario();
+$favorito = $objUsuario->getFavorito($uid, $id);
+$txt_favorito;
+if ($favorito) {
+    $txt_favorito = '<a class="onBorrarFavorito" data-usuario="'.$uid.'" data-negocio="'.$id.'">Guardado como favorito</a>';
+} else {
+    $txt_favorito = '<a class="onAgregarFavorito" data-usuario="'.$uid.'" data-negocio="'.$id.'">Guardar como favorito</a>';
+}
+
+
+// Lista de testimonios
+$objTestimonio = new Testimonio();
+$testimonios = $objTestimonio->getNegocioTestimonio($id);
+$testimonios_list;
+foreach ($testimonios as $testimonio) {
+    $testimonios_list .= '<div class="card">
+    <div class="card-content">
+    <span class=""><b>'.$testimonio['unombre'].'</b></span>
+    <p>'.$testimonio['testimonio'].'</p>
+    </div>
+    </div>';
+}
+
+// Lista de zonas
+$objZona = new Zona();
+$zonas = $objZona->zonaNegocio($id);
+$listado_zonas;
+foreach ($zonas as $zona) {
+    $listado_zonas.=$zona['zona'].', ';
+}
+
+// Lista de servicios
+$objServicio = new Servicio();
+$servicios = $objServicio->servicioNegocio($id);
+$listado_servicios;
+foreach ($servicios as $servicio) {
+    $listado_servicios.=$servicio['servicio'].', ';
+}
+?>-->
+
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Detalle</title>
+  <meta charset="UTF-8">
+  <!--Import Google Icon Font-->
+  <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!--Import materialize.css-->
+  <link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection" />
+  <link type="text/css" rel="stylesheet" href="css/custom.css" media="screen,projection" />
+
+  <!--Let browser know website is optimized for mobile-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+</head>
+
+<body>
+
+  <ul id="slide-out" class="side-nav fixed">
+    <li><a href="servicios.html">Solicitar servicio</a></li>
+    <li><a href="cotizaciones.html">Cotizaciones (chat)</a></li>
+    <li><a href="favoritos.html">Favoritos</a></li>
+    <li><a href="historial.html">Historial (llamadas, mensajes)</a></li>
+    <li><a href="editar_perfil.html">Editar perfil</a></li>
+    <li><a href="agregar_direccion.html">Agregar direccion</a></li>
+    <li><a href="logout.html">Cerrar sesión</a></li>
+  </ul>
+  <a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a>
+
+
+  <div class="container">
+    <div class="row">
+      <div class="col s12">
+        <ul>
+          <li onClick="favorito()"><i class="material-icons prefix">start</i><span id="favorito"></span>
+</li>
+<li><i class="material-icons prefix">start</i><span id="nombre"></span>
+</li>
+<li><i class="material-icons prefix">start</i>Zonas:
+  <span id="zonas"></span>
+</li>
+<li><i class="material-icons prefix">start</i>Servicios:
+  <span id="servicios"></span>
+</li>
+</ul>
+</div>
+</div>
+<div class="row">
+  <div class="col s12">
+    <div class="page-title">
+      <h5 align="center">Testimoniales</h5>
+    </div>
+    <div class="col s12 center-align" id="testimonios"></div>
+  </div>
+
+</div>
+<div class="row btn-negocio">
+  <div class="col s4 ">
+    <a href="evaluar.html " class="waves-effect waves-light btn blue ">Evaluar</a>
+  </div>
+  <div class="col s4 offset-s3">
+    <a class="waves-effect waves-light btn blue onLlamada">Llamar</a>
+  </div>
+</div>
+</div>
+
+<!--Import jQuery before materialize.js-->
+<script type="text/javascript " src="https://code.jquery.com/jquery-2.1.1.min.js "></script>
+<script type="text/javascript " src="js/materialize.min.js "></script>
+<script type="text/javascript " src="js/app.js "></script>
+<script>
+  $('.button-collapse').sideNav({
+    menuWidth: 300, // Default is 240
+    edge: 'left', // Choose the horizontal origin
+    closeOnClick: true, // Closes side-nav on <a> clicks, useful for Angular/Meteor
+    draggable: true // Choose whether you can drag to open on touch screens
+  });
+</script>
+
+<script>
+  $(document).ready(function (e) {
+    checkSession();
+    id = getUrlVars()["id"];
+    Customer.negocioDetalles(id);
+  });
+
+  function favorito() {
+    // Customer.switchFavorito(id);
+  }
+</script>
+</body>
+
+</html>

@@ -1,0 +1,19 @@
+{
+    "remotePath": "./serviciosapp.mobkii.net/",
+    "host": "ftp.mobkii.net",
+    "username": "lgarcia@mobkii.net",
+    "password": "Mobkii2017",
+    "port": 21,
+    "protocol": "ftp",
+    "uploadOnSave": false,
+    "passive": false,
+    "debug": false,
+    "privateKeyPath": null,
+    "ignore": [
+        "\\.vscode",
+        "\\_composer",
+        "\\assets",   
+        "\\back01",   
+        "\\.git"
+    ]
+}

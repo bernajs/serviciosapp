@@ -1,0 +1,158 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" />
+
+    <meta charset="UTF-8">
+    <title>Admin - Comentarios</title>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,300' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+
+    <style>
+body,html { height:100%;}
+body { margin:0; padding:0; background-color:#fbfbfb;font-family: 'Open Sans', sans-serif; }
+h1,h2,h3 { margin:0; padding:0; }
+a { text-decoration:none;}
+#layout { width:100%; text-align:center; height:100%; }
+#layout #modal { background-color:rgba(0,0,0,.50); position:fixed; left:0; top:0; right:0; bottom:0; z-index:1; display:none;}
+#layout #modal .window { width:90%; bottom:-50%; left:0; right:0; margin:auto; position:absolute; }
+#layout #modal .window a { 
+display:block; border-radius:6px; background-color:#fbfbfb; color:#3498db; margin:auto; min-height:50px; margin-bottom:15px;
+font-size:18px; line-height:45px;
+
+}
+#layout #modal .window a.btn.cancel { font-weight:700;}
+#layout #comentarios { height:100%; width:100%;}
+#layout .header { height:10%; background-color:#16a085; border-bottom:#ccc solid 1px; overflow:hidden;}
+#layout .header h1 { font-size:18px; color:#fff; padding-top:3px;}
+#layout .header h2 { font-size:12px; color:#fff;}
+
+#layout .body { height:100%; background-color:#e7e3d6;}
+#layout .body .chat { width:100%; height:100%; overflow-y:scroll;}
+#layout .body .chat .msg { text-align:left; width:100%; }
+#layout .body .chat .msg:last-child { margin-bottom:100px;}
+#layout .body .chat .msg.me .bubble { float:right; background-color:#dcfac7;}
+#layout .body .chat .bubble { 
+width:70%; border:#ccc solid 1px; border-radius:6px; margin:10px; padding:10px; font-size:12px; padding-top:5px; padding-bottom:5px; 
+box-shadow:1px 1px 2px rgba(0,0,0,.20); background-color:#fff; }
+#layout .body .chat .bubble h2 { color:#3498db; font-size:12px; }
+#layout .body .chat .bubble h3 { color:#999; font-weight:400; text-align:right; font-size:10px; margin-top:5px; }
+
+#layout .body .chat .bubble p { margin:0;}
+#layout .actions { height:10%; background-color:#f7f7f7; position:absolute; bottom:0; width:100%; border-top:#ccc solid 1px;}
+#layout .actions .row { width:100%; height:100%;}
+#layout .actions .col {display: inline-block; height:100%; vertical-align:middle;}
+#layout .actions .col.left { width:12%; text-align:center; }
+#layout .actions .col.left a { color:#666; margin-top:10px; display:block;} 
+#layout .actions .col.right { width:85%; vertical-align: middle; position:relative; text-align:left; }
+#layout .actions .col.right textarea { width:80%; resize:none; height:35px; margin-top:8px;}
+#layout .actions .col.right a { background-color:#960C30; color:#fff; position:absolute; display:block; width:50px; top:8px; right:5px; height:35px; line-height:35px; font-size:14px; text-align:center;}
+#case { width:80%; margin:auto;}
+#case form { max-width:640px; margin:auto; border:#e4e4e4 solid 1px; background-color:#fff;}
+#case form label { display:block; }
+#case form .actions { margin-top:20px; margin-bottom:20px;}
+#case form .actions a { padding:5px; min-width:120px; text-align:center; color:#fff; display:inline-block;}
+#case form .tab .holder { display:none;}
+#case form .tab .holder.active { display:block;}
+#case form .tab table { margin:auto;}
+#case form .tab h2 { background-color:#e4e4e4; border:#ccc solid 1px; position:relative; text-align:left; text-indent:15px; font-size:16px; }
+#case form .tab h2 a { position:absolute; right:10px; display:inline-block;}
+a.btn.save { padding:5px; min-width:120px; text-align:center; background-color:#2ecc71; color:#fff; display:inline-block; font-size:12px; border-radius:6px;}
+a.btn.add { padding:5px; min-width:30px; text-align:center; background-color:#3498db; color:#fff; display:inline-block; font-size:12px; border-radius:6px;}
+a.btn.exp { color:#bdc3c7; }
+a.btn.remove { color:#fd1a13; }
+.clear { clear:both;}
+
+* {
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+}
+*:before,
+*:after {
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+
+  select,
+  textarea,
+  input {
+    font-size: 16px;
+  }
+
+  .red{
+      color:red;
+  }
+
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+<!--<script src='_js/fastclick.js'></script>-->
+<script src='js/app.js'></script>
+</head>
+
+<body>
+
+    <div id="layout">
+        <div id="modal">
+            <div class="window">
+                <a href="javascript:void(0)" class="onClickShare">Compartir conversación</a>
+                <A href="javascript:void(0)" class="btn cancel onClickCancel">Cancelar</A>
+            </div>
+        </div>
+        <div id="comentarios" class="page">
+            <div class="body">
+                <div class="chat">
+
+                </div>
+            </div>
+            <div class="actions">
+                <div class="row">
+                    <div class="col left">
+                        <a href="javascript:void(0)" class="onCliclModal" style="display:none"><i class="fa fa-arrow-circle-o-up fa-2x"></i></a>
+</div>
+<div class="col right">
+    <textarea id="message" name="message"></textarea>
+    <a href="javascript:void(0)" class="btn onClickEnviar">Enviar</a>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        Customer.getChat();
+    });
+</script>
+<!--<script>
+    $(document).ready(function () {
+
+        Caso.chat_get();
+        Caso.getEstatus();
+        $("a.onCliclModal").click(function () {
+            $("#modal").fadeIn();
+            $("#modal .window").animate({ bottom: "5px" }, 700);
+        });
+
+        $("a.onClickCancel").click(function () {
+            $("#modal").fadeOut();
+            $("#modal .window").animate({ bottom: "-50%" }, 600);
+        });
+
+        $("a.onClickEnviar").click(function () {
+            $("body").scrollTop();
+            $(".chat").scrollTop();
+            var vars = { cid: localStorage.getItem("cid"), uid: localStorage.getItem("uid"), msg: $("#message").val(), auditor: 0 };
+            Caso.chat_msg(vars);
+        });
+
+    });
+</script>-->
+
+</body>
+
+</html>

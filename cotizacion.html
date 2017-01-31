@@ -1,0 +1,186 @@
+<!--<?php
+include_once("_inc/inc.head.php");
+$data = NULL;
+require_once("admin/_class/class.servicio.php");
+require_once("admin/_class/class.zona.php");
+require_once("admin/_class/class.servicio.php");
+
+//Obtiene la lista de negocios de acuerdo al id del servicio
+$obj = new Servicio();
+$negocios = $obj->getServicioDetalle($_GET['id'], null);
+$lista_negocios;
+
+
+//Checa si se selecciono una zona para filtrar la lista de negocios si no se selecciono ninguna zona entonces solo
+// filta por servicio
+if($_GET['zona']){
+    $negocios = $obj->getServicioDetalle($_GET['id'], $_GET['zona']);
+    foreach ($negocios as $negocio) {
+        $lista_negocios .= '
+        <li><input type="checkbox" value="'.$negocio['id'].'" id="'.$negocio['id'].'" name="id_negocio">
+        <label for="'.$negocio['id'].'">'.$negocio['nombre'].'</label>
+        <br>
+        </div>
+        <div class="col s12" style="border-bottom: solid 1px;">
+        <p>Servicio: '.$negocio['servicio'].'</p>
+        </div></li>';
+    }
+}else{
+    $negocios = $obj->getServicioDetalle($_GET['id'], null);
+    foreach ($negocios as $negocio) {
+
+        
+        $lista_negocios .= '<li>
+        <input type="checkbox" id="chk_'.$negocio['id'].'" value="'.$negocio['id'].'" name="id_negocio[]" />
+        <label for="chk_'.$negocio['id'].'">'.$negocio['nombre'].'</label>
+        </li>';
+    }
+}
+
+
+//Obtener la lista de zonas
+$objZona = new Zona();
+$zonas = $objZona->getData();
+$lista_zonas;
+foreach ($zonas as $zona) {
+    $lista_zonas .= '<a href="servicio.php?id="'.$_GET['id'].'&zona='.$zona['id'].'><option value="'.$zona['id'].'">'.$zona['zona'].'</option></a>';
+}
+
+//Obtner la lista de servicios
+$servicios = $obj->getData();
+$lista_servicios;
+foreach ($servicios as $servicio) {
+    $lista_servicios .= '<option value="'.$servicio['id'].'">'.$servicio['servicio'].'</option>';
+}
+
+?>-->
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Categoría</title>
+  <meta charset="UTF-8">
+  <!--Import Google Icon Font-->
+  <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!--Import materialize.css-->
+  <link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection" />
+  <link type="text/css" rel="stylesheet" href="css/custom.css" media="screen,projection" />
+
+  <!--Let browser know website is optimized for mobile-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+</head>
+
+<body>
+
+  <ul id="slide-out" class="side-nav fixed">
+    <li><a href="servicios.html">Solicitar servicio</a></li>
+    <li><a href="cotizaciones.html">Cotizaciones (chat)</a></li>
+    <li><a href="favoritos.html">Favoritos</a></li>
+    <li><a href="historial.html">Historial (llamadas, mensajes)</a></li>
+    <li><a href="editar_perfil.html">Editar perfil</a></li>
+    <li><a href="agregar_direccion.html">Agregar direccion</a></li>
+    <li><a href="logout.html">Cerrar sesión</a></li>
+  </ul>
+  <a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a>
+
+
+  <div class="row" id="data">
+    <div class="row buscar-blue">
+      <div class="input-field col s10 offset-s1 buscar">
+        <input id="buscar" type="text" class="search">
+      </div>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col s12 select">
+          <div class="input-field col s12">
+            <select id="zona">
+            </select>
+            <label>Zona</label>
+          </div>
+          <!--<div class="input-field col s6 select">
+          <select id="servicio">
+            </select>
+          <label>Servicio</label>
+        </div>-->
+          <p><b>Resultados: <span id="nombre-servicio"></span> (<span id="resultados-total"></span>)</b></p>
+        </div>
+      </div>
+      <form action="" id="frmCotizacion" name="frmCotizacion">
+        <!--<input type="text" class="search">-->
+        <ul class="list"></ul>
+        <!--<?php echo $lista_negocios ?>-->
+    </div>
+    <!--<input id="id_cotizacion" name="id_cotizacion" type="hidden" value="<?php echo $_GET['cot']; ?>">-->
+    </form>
+  </div>
+
+  <!--Fab-->
+  <div class="fixed-action-btn">
+    <a class="btn-floating btn-large blue onClickCotizacion">
+      <i class="large material-icons">send</i>
+    </a>
+  </div>
+
+
+  <!-- Modal Structure -->
+  <div id="modal1" class="modal modal-fixed-footer">
+    <div class="modal-content">
+      <div class="row">
+        <div class="col s12">
+          <ul>
+            <li onClick="favorito()"><i class="material-icons prefix">start</i><span id="favorito"></span>
+</li>
+<li><i class="material-icons prefix">start</i><span id="nombre"></span>
+</li>
+<li><i class="material-icons prefix">start</i>Zonas:
+  <span id="zonas"></span>
+</li>
+<li><i class="material-icons prefix">start</i>Servicios:<span id="servicio"></span>
+</li>
+</ul>
+</div>
+</div>
+<div class="row">
+  <div class="col s12">
+    <div class="page-title">
+      <h5 align="center">Testimoniales</h5>
+    </div>
+    <div class="col s12 center-align" id="testimonios"></div>
+  </div>
+
+</div>
+</div>
+<div class="modal-footer">
+  <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Cerrar</a>
+</div>
+</div>
+
+<!--Import jQuery before materialize.js-->
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script type="text/javascript" src="js/materialize.min.js"></script>
+<script type="text/javascript" src="js/app.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/list.js/1.4.0/list.min.js"></script>
+
+
+<script>
+  $(document).ready(function () {
+    $('select').material_select();
+    $('.modal').modal();
+  });
+</script>
+
+<script>
+  var id;
+  $(document).ready(function (e) {
+    checkSession();
+    id = getUrlVars()["id"];
+    id_cotizacion = 1;
+    Customer.getFiltros(id);
+    Customer.cotizacionNegocios(0, id_cotizacion);
+  });
+</script>
+</body>
+
+</html>
