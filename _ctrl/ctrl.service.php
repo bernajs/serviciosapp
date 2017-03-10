@@ -2,8 +2,10 @@
 session_start();
 require_once('../_composer/class.notify.php');
 require_once('../admin/_class/class.service.php');
+require_once('../admin/_class/class.push.php');
 $objNotify = new Notify();
 $obj = new Service();
+$push = new Push();
 switch($_POST['exec']) {
     case "getServicios":
         $servicios = $obj->getServicios();
@@ -42,8 +44,37 @@ case "updateProfile":
     set_id($data['id'])->
     db('update');
     $result['status'] = 202;
+    // $push->sendMessage('48d92136-d140-4490-9aa9-6f701a8b9f73','Tu perfil ha sido actualizado', NULL);
     echo json_encode($result);
     break;
+case "getCompartir":
+    $data = $_POST['data'];
+    $compartir = $obj->getCompartir($data);
+    if ($compartir) {
+        $result['status'] = 202;
+        $result['data'] = $compartir;
+} else {
+    $result['status'] = 0;
+}
+echo json_encode($result);
+break;
+case "compartir":
+    $data = $_POST['data'];
+    $direcciones = array();
+    foreach ($data['direcciones'] as $direccion) {
+        array_push($direcciones, $direccion);
+}
+$obj->set_correo($data['correo'])->
+set_movil($data['movil'])->
+set_id_usuario($data['id_usuario'])->
+set_ubicacion($data['ubicacion'])->
+set_id_negocio($data['id_negocio'])->
+set_id_cotizacion($data['id_cotizacion'])->
+set_direccion(json_encode($direcciones))->
+db('compartir');
+$result['status'] = 202;
+echo json_encode($result);
+break;
 case "evaluar":
     $data = $_POST['data'];
     // $calificacion = $data['chk['];
@@ -117,6 +148,18 @@ case "actualizarDireccion":
     break;
 break;
 case "enviarChat":
+    // $data = $_POST['data'];
+    // $obj->set_id_usuario($data['id_usuario'])->
+    // set_id_negocio($data['id_negocio'])->
+    // set_id_requerimiento($data['id_requerimiento'])->
+    // set_mensaje($data['mensaje'])->
+    // set_tipo_usuario($data['tipo_usuario'])->
+    // set_status(0)->
+    // set_created_at(date("Y-m-d H:i:s"))->
+    // db('enviarChat');
+    // $result['status'] = 202;
+    // $result['redirect'] = 'perfil.html';
+    
     $data = $_POST['data'];
     $obj->set_id_usuario($data['id_usuario'])->
     set_id_negocio($data['id_negocio'])->
@@ -127,9 +170,22 @@ case "enviarChat":
     set_created_at(date("Y-m-d H:i:s"))->
     db('enviarChat');
     $result['status'] = 202;
-    // $result['redirect'] = 'perfil.html';
-    echo json_encode($result);
-    break;
+    //Si es usuario 0 = cliente entonces saca el oid del cliente sino saca el oid del negocio
+    if($data['tipo_usuario'] == 1){
+        $uoid = $obj->getUOID($data['id_usuario']);
+        if($uoid){
+            $url = 'http://serviciosapp.mobkii.net/chatmio.html?negocio='.$data['id_negocio'].'&requerimiento='.$data['id_requerimiento'].'&s='.$data['servicio'];
+            $push->sendMessage($uoid[0]['oid'],'Tienes un nuevo mensaje.', $url, NULL);
+    }
+}else if($data['tipo_usuario'] == 0){
+    $noid = $obj->getNOID($data['id_negocio']);
+    if($noid){
+        $url = 'http://serviciosapp.mobkii.net/negocio/negocio_chat.html?usuario='.$data['id_usuario'].'&requerimiento='.$data['id_requerimiento'];
+        $push->sendMessage($noid[0]['oid'],'Tienes un nuevo mensaje.', $url, 1);
+    }
+}
+echo json_encode($result);
+break;
 break;
 case "getChat":
     $data = $_POST['data'];
@@ -232,8 +288,7 @@ case "negocioDetalles":
     $favorito = $obj->negocioFavorito($id_usuario, $id_negocio);
     $negocio = $obj->getNegocio($id_negocio);
     $datos = array("testimonios"=>$testimonios, "zonas"=> $zonas, "servicios"=>$servicios,"favorito"=>$favorito, "negocio"=>$negocio);
-    // print_r($negocio);
-    if($datos){
+    if($negocio){
         $obj->visita($data['id_negocio']);
         $result['data'] = $datos;
         $result['status'] = 202;
@@ -278,7 +333,7 @@ break;
 case "cotizar":
     $data = $_POST['data'];
     $cotizacion = $obj->cotizar($data['id_usuario'],$data['id_servicio'], $data['cotizacion'],
-    $data['fecha_submit'], date("Y-m-d H:i:s"));
+    $data['fecha_submit'], date("Y-m-d H:i:s"), $data['imagenes']);
     if($cotizacion){
         $result['redirect'] = 'cotizacion.html?id='.$data['id_servicio'];
         $result['id_cotizacion'] = $cotizacion;
@@ -290,21 +345,46 @@ break;
 // Mejorar, se puede hacer este case y el de cotzar en un solo case
 case "cotizacion":
     $data = $_POST['data'];
-    $obj->set_id_negocio($data['id_negocio['])->
-    set_id_cotizacion($data['id_cotizacion'])->
-    set_modified_at(date("Y-m-d H:i:s"))->
-    db('cotizacion');
-    $result['status'] = 202;
-    $result['redirect'] = "servicios.html";
-    echo json_encode($result);
-    break;
+    $negocios = (explode('|', $data['id_negocio[']));
+    for ($i=0; $i < (count($negocios)); $i++) {
+        if ($negocios[$i] != '') {
+            $obj->set_id_negocio($negocios[$i])->
+            set_id_cotizacion($data['id_cotizacion'])->
+            set_id_usuario($data['id_usuario'])->
+            set_modified_at(date("Y-m-d H:i:s"))->
+            db('cotizacion');
+            $obj->cotizacion_estadistica($negocios[$i]);
+            
+            $obj->set_id_usuario($data['id_usuario'])->
+            set_id_negocio($negocios[$i])->
+            set_id_requerimiento($data['id_cotizacion'])->
+            set_mensaje($data['cotizacion'])->
+            set_tipo_usuario(0)->
+            set_status(0)->
+            set_created_at(date("Y-m-d H:i:s"))->
+            db('enviarChat');
+            
+            
+            $noid = $obj->getNOID($negocios[$i]);
+            if($noid){
+                $push->sendMessage($noid[0]['oid'],'Tienes una cotización nueva.', NULL, true);
+        }
+        // $uoid = $obj->getUOID($data['id_usuario']);
+        // if($uoid){
+        //     $push->sendMessage($uoid[0]['oid'],'Haz enviado una cotización.', NULL, NULL);
+        // }
+    }
+}
+$result['status'] = 202;
+$result['redirect'] = "servicios.html";
+echo json_encode($result);
+break;
 case "recover":
     $data = $_POST['data'];
-    $email = $obj->isValidEmail($data['e']);
+    $email = $obj->check_email($data['e']);
     if($email){
-        $code = $email[0]['id'].'.'.md5(date("Ymdhis"));
-        $notify_data = ['code' => $code];
-        $objNotify->send("recuperar-contrasena",$notify_data,$email[0]['correo']);
+        $notify_data = ['contrasena' => $email[0]['contrasena'], "usuario"=>$email[0]['nombre']];
+        $objNotify->send("homefix-recuperar-contrasena",$notify_data,$email[0]['correo']);
         $result['status'] = 202;
 }else{
     $result['status'] = 404;
@@ -315,7 +395,7 @@ case "login":
     $data = $_POST['data'];
     $user = $obj->isRegistered($data['u'],$data['p']);
     if($user){
-        $result['redirect'] = 'servicios.html';
+        $result['redirect'] = 'process.html?id='.$user[0]['id'];
         $result['status'] = 202;
         $result['uid'] = $user[0]['id'];
 }else{
@@ -349,23 +429,70 @@ case "votoCiudad":
 echo json_encode($result);
 break;
 case "registro":
+    $flag = 0;
     $data = $_POST['data'];
-    if($data['contrasena'] == $data['confirmar_contrasena']){
-        $obj->set_correo($data['correo'])->
-        set_nombre($data['nombre'])->
-        set_movil($data['movil'])->
-        set_id_ciudad($data['id_ciudad'])->
-        set_contrasena($data['contrasena'])->
-        set_confirmar_contrasena($data['confirmar_contrasena'])->
-        set_created_at(date("Y-m-d H:i:s"))->
-        set_status($data['status'])->
-        db('insert');
-        $uid = $obj->getLastInserted();
-        $result['status'] = 202;
-        $result['uid'] = $uid;
-        $result['redirect'] = 'servicios.html';
+    if($obj->check_email($data['correo'])){
+        $result['status'] = 409;
+}else if($obj->check_tel($data['movil'])){
+    $result['status'] = 408;
 }else{
-    $result['status'] = 409;
+    $obj->set_correo($data['correo'])->
+    set_nombre($data['nombre'])->
+    set_movil($data['movil'])->
+    set_id_ciudad($data['id_ciudad'])->
+    set_contrasena($data['contrasena'])->
+    set_confirmar_contrasena($data['confirmar_contrasena'])->
+    set_created_at(date("Y-m-d H:i:s"))->
+    set_status($data['status'])->
+    db('insert');
+    $uid = $obj->getLastInserted();
+    $result['status'] = 202;
+    $result['uid'] = $uid;
+    $result['redirect'] = 'process.html';
+    $notify_data = ["usuario"=>$data['nombre']];
+    $objNotify->send("homefix-nuevo-registro",$notify_data,$data['correo']);
+    $result['status'] = 202;
+}
+echo json_encode($result);
+break;
+case "loginfb":
+    if($obj->check_email($_POST['email'])){
+        $result['status'] = 409;
+}else if($obj->check_tel($_POST['telefono'])){
+    $result['status'] = 408;
+}else{
+    $usuario = $obj->isFbRegistered($_POST['id']);
+    if (!$usuario) {
+        $obj->set_fid($_POST['id'])->
+        set_nombre($_POST['name'])->
+        set_id_ciudad($_POST['ciudad'])->
+        set_movil($_POST['telefono'])->
+        set_correo($_POST['email'])->
+        set_status(1)->
+        set_created_at(date('Y-m-d H:i:s'))->
+        db('insert');
+        $li = $obj->getLastInserted();
+        $result['redirect']='process.html?id='.$li;
+        $result['uid']=$li;
+    } else {
+        $result['uid']=$usuario[0]['id'];
+        $result['redirect']='process.html?id='.$usuario[0]['id'];
+    }
+    $result['status']=202;
+}
+echo json_encode($result);
+break;
+case "isRegisteredFb":
+    $data = $_POST['data'];
+    $usuario = $obj->isFbRegistered($data['id']);
+    if (!$usuario) {
+        $ciudades = $obj->getCiudades();
+        $result['status'] = 0;
+        $result['ciudades'] = $ciudades;
+} else {
+    $result['uid']=$usuario[0]['id'];
+    $result['redirect']='process.html?id='.$usuario[0]['id'];
+    $result['status']=202;
 }
 echo json_encode($result);
 break;

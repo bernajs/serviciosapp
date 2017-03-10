@@ -1,4 +1,117 @@
+/*----*/
+
+
 /*General*/
+
+
+/*COLORES*/
+
+.color-azul {
+    background-color: #1688e5 !important;
+}
+
+.color-tipografia {
+    color: #9E9E9E !important;
+}
+
+.color-azul-oscuro {
+    background-color: #004DB4 !important;
+}
+
+.color-verde {
+    background-color: #2ECC71 !important;
+}
+
+.color-negro {
+    background-color: #171717 !important;
+}
+
+.color-azul-claro {
+    background-color: #91C0E7 !important;
+}
+
+.color-amarillo {
+    background-color: #F3C46B !important;
+}
+
+.color-rojo {
+    background-color: #E74C3C !important;
+}
+
+.color-gris-claro {
+    background-color: #f7f7f7 !important;
+}
+
+.txt-amarillo {
+    color: #F3C46B !important;
+}
+
+.txt-gris-claro {
+    color: #9E9E9E !important;
+}
+
+.txt-verde {
+    color: #2ECC71 !important;
+}
+
+.txt-azul-claro {
+    color: #91C0E7 !important;
+}
+
+.txt-blanco {
+    color: white !important;
+}
+
+.txt-azul-oscuro {
+    color: #004DB4 !important;
+}
+
+.picker__date-display {
+    background-color: #2C8BEB !important;
+}
+
+.picker__weekday-display {
+    background-color: #004DB4 !important;
+}
+
+.collection .collection-item.avatar {
+    min-height: 0px !important;
+}
+
+.tabs .tab a:hover,
+.tabs .tab a.active {
+    color: black !important;
+}
+
+.tabs .tab a {
+    color: black !important;
+}
+
+.indicator {
+    background-color: black !important;
+}
+
+span.badge.new:after {
+    content: "" !important;
+}
+
+span.badge {
+    min-width: 1rem !important;
+}
+
+span.badge.new {
+    margin-top: 20px !important;
+    margin-right: 20px !important;
+    min-width: 1.5rem !important;
+    border-radius: 10px !important;
+    font-weight: bold;
+}
+
+hr {
+    background-color: #E4E4E4 !important;
+    border: none;
+    height: 1px;
+}
 
 li {
     list-style: none !important;
@@ -18,12 +131,58 @@ a {
     margin-top: 20px;
 }
 
+.full-btn {
+    width: 100%;
+}
+
+.margint-10 {
+    margin-top: 20px !important;
+}
+
+.marginb-10 {
+    margin-bottom: 10px !important;
+}
+
+.marginb-0 {
+    margin-bottom: 0px !important;
+}
+
+.margint-20 {
+    margin-top: 20px !important;
+}
+
+.marginb-20 {
+    margin-bottom: 20px !important;
+}
+
+.paddingt-10 {
+    padding-top: 10px !important;
+}
+
+.padding0 {
+    padding: 0px!important;
+}
+
+.collection{
+    border:none !important;
+}
+
+.header {
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    z-index: 99;
+    /*padding-top: 5px;
+    padding-bottom: 5px;*/
+}
+
 h6 {
-    color: blue;
+    /*color: blue;*/
 }
 
 .card-action {
-    padding: 0px !important;
+    padding: 5px !important;
 }
 
 .img-cotizacion {
@@ -78,24 +237,32 @@ p {
 }
 
 .mensaje-div {
-    background-color: black;
-    padding: 10px 0px 10px 20px !important;
+    padding: 5px 0px !important;
+    text-align: center !important;
 }
 
 .buscar-blue {
-    background-color: black;
+    /*background-color: #2C8BEB;*/
     padding-bottom: 10px;
-    margin-bottom: 20px !important;
+    margin-bottom: 0px !important;
 }
 
 .buscar {
     background-color: white;
-    border-radius: 5px;
+    padding-left: 2px !important;
+    padding-top: 1px !important;
+    margin-left: 4.2% !important;
+    height: 2.3rem !important;
+    /*border-radius: 5px;*/
 }
 
 .buscar input {
+    height: 2.3rem !important;
     margin: 0px;
     border-bottom: none !important;
+    background: url(../../admin/assets/images/search.png) no-repeat scroll;
+    background-size: 30px 30px;
+    padding-left: 30px;
 }
 
 .buscar .active {
@@ -107,18 +274,34 @@ p {
     left: 0px;
     bottom: 0px;
     width: 100%;
-    background: #ECEFF1;
+    background-color: #f7f7f7 !important;
     padding-top: 5px;
     padding-bottom: 5px;
 }
 
+.chat-input input {
+    margin: 0px;
+    border-bottom: none;
+    height: 2.5rem !important;
+}
+
+.caja-msj {
+    padding: 5px 10px !important;
+    margin: 5px 0px !important;
+}
 .chat-input {
     background-color: white;
-    border-radius: 50px;
+    height: 2.5rem !important;
+    border-radius: 5px;
 }
 
 .chat-share i {
-    margin: 10px 0px 5px 15px !important;
+    /*margin: 10px 0px 5px 15px !important;*/
+}
+
+.chat {
+    margin-bottom: 53px !important;
+    margin-top: 45px !important;
 }
 
 .msj .col {}
@@ -126,12 +309,12 @@ p {
 .chat-input input {
     margin: 0px;
     border-bottom: none;
+    height: 2.5rem !important;
 }
 
-.chat-btn a {
-    margin-top: 4px !important;
-    margin-left: 5px !important;
-    padding-left: 15px !important;
+.chat-btn {
+    margin-top: 8px !important;
+    margin-left: 10px !important;
 }
 
 .container {
@@ -156,10 +339,17 @@ input {
     /*margin-bottom: 0px !important;*/
 }
 
-.modal.modal-fixed-footer{
+.modal.modal-fixed-footer {
     height: 100% !important;
 }
 
-.modal{
+.modal {
     width: 95% !important;
+}
+
+
+/*Llamada.html*/
+
+.select .input-field {
+    margin-top: 0px !important;
 }

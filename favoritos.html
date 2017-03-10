@@ -1,120 +1,306 @@
-<!--<?php
-require_once("admin/_class/class.usuario.php");
-include_once("_inc/inc.head.php");
-$obj = new Usuario();
-$favoritos = $obj->getFavoritos($uid);
-$lista_favoritos;
-
-foreach ($favoritos as $favorito) {
-    $lista_favoritos .= '      <div class="row">
-    <a href="negocio.php?id='.$favorito['id'].'">
-    <div class="col s12">
-    <b>'.$favorito['nombre'].'</b>
-    <br>
-    </div>
-    <div class="col s12" style="border-bottom: solid 1px;">
-    <p>Servicios: Plomería, Electricista</p>
-    </a>
-    </div>
-    </div>';
-}
-?>-->
 <!DOCTYPE html>
+
 <html>
 
+
+
 <head>
+
   <title>Favoritos</title>
+
   <meta charset="UTF-8">
+
   <!--Import Google Icon Font-->
-  <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+  <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">   
+  <meta http-equiv="Pragma" content="no-cache">   
+  <meta http-equiv="Expires" content="-1">
+
   <!--Import materialize.css-->
+
   <link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection" />
+
   <link type="text/css" rel="stylesheet" href="css/custom.css" media="screen,projection" />
 
+  <link type="text/css" rel="stylesheet" href="admin/assets/plugins/sweetalert/sweetalert.css" media="screen,projection" />
+
+
+
   <!--Let browser know website is optimized for mobile-->
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <style>
+   
+    .servicios {
+      color: seagreen !important;
+    }
+    
+    span.badge.new {
+      margin-top: 20px !important;
+      margin-right: 20px !important;
+    }
+    
+    .secondary-content {
+      margin-top: 18px !important;
+    }
+    
+    .icon-msj {
+      margin-top: 15px !important;
+    }
+    
+    .modal .modal-content {
+      padding: 0px !important;
+    }
+    
+    .acciones {
+      margin-top: 15px !important;
+    }
+    /*Modal negocio*/
+    
+    .div-calificacion {
+      margin-top: 3px !important;
+    }
+    
+    .div-exp {
+      margin-top: 40px !important;
+    }
+    
+    a {
+      color: black;
+    }
+    
+    .div-calificacion {
+      margin-top: 3px !important;
+    }
+    
+    #frmEvaluar {
+      margin-top: 25px !important;
+    }
+    
+    .div-exp {
+      margin-top: 40px !important;
+    }
+    
+    #data {
+      margin-top: 66px !important;
+    }
+    
+    .container {
+      width: 95% !important;
+    }
+    
+    .collection-item {
+      padding: 10px 2%!important;
+    }
+  </style>
+
 </head>
 
+
+
 <body>
-  <div class="row buscar-blue">
-    <div class="input-field col s10 offset-s1 buscar">
-      <input id="buscar" type="text" class="validate">
-      <label for="buscar">Buscar</label>
+
+  <div id="data">
+
+    <div class="row buscar-blue color-azul header">
+
+      <div class="input-field col s11 offset-s1 buscar">
+
+        <input id="buscar" type="text" class="search" placeholder="Buscar">
+
+      </div>
+
     </div>
-  </div>
 
-  <ul id="slide-out" class="side-nav fixed">
-    <li><a href="servicios.html">Solicitar servicio</a></li>
-    <li><a href="cotizaciones.html">Cotizaciones (chat)</a></li>
-    <li><a href="favoritos.html">Favoritos</a></li>
-    <li><a href="historial.html">Historial (llamadas, mensajes)</a></li>
-    <li><a href="editar_perfil.html">Editar perfil</a></li>
-    <li><a href="agregar_direccion.html">Agregar direccion</a></li>
-    <li><a href="logout.html">Cerrar sesión</a></li>
-  </ul>
-  <a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a>
+    <div class="container">
 
-  <div class="container">
+      <ul class="list collection"></ul>
+
+    </div>
 
   </div>
+
+
+
 
 
   <!-- Modal Structure -->
-  <div id="modal1" class="modal modal-fixed-footer">
+
+  <div id="modal2" class="modal modal-fixed-footer">
     <div class="modal-content">
+      <div class="row color-negro txt-blanco">
+        <div class="col s12">
+          <ul class="negocio-detalles">
+            <li class="li valign-wrapper"><i class="material-icons prefix negocio-icon valign">store</i><b><span id="nombre" class="negocio-detalle valign"></span></b>
+            </li>
+            <li class="li valign-wrapper"><i class="material-icons prefix negocio-icon valign">place</i>
+              <span id="zonas" class="negocio-detalle valign"></span>
+            </li>
+            <li class="li valign-wrapper"><i class="material-icons prefix negocio-icon valign">work</i>
+              <span id="servicios" class="negocio-detalle valign"></span>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="row acciones">
+        <div class="col s4 center-align llamar"></div>
+        <div class="col s4 center-align">
+          <a id="favorito"></a>
+        </div>
+        <div class="col s4 center-align evaluar"></div>
+      </div>
+      <hr>
       <div class="row">
         <div class="col s12">
-          <ul>
-            <li onClick="favorito()"><i class="material-icons prefix">start</i><span id="favorito"></span>
-</li>
-<li><i class="material-icons prefix">start</i><span id="nombre"></span>
-</li>
-<li><i class="material-icons prefix">start</i>Zonas:
-  <span id="zonas"></span>
-</li>
-<li><i class="material-icons prefix">start</i>Servicios:<span id="servicios"></span>
-</li>
-</ul>
-</div>
-</div>
-<div class="row">
-  <div class="col s12">
-    <div class="page-title">
-      <h5 align="center">Testimoniales</h5>
+          <div class="page-title">
+            <h5>Testimoniales</h5>
+          </div>
+          <div class="col s12 txt-gris-claro" id="testimonios"></div>
+        </div>
+      </div>
     </div>
-    <div class="col s12 center-align" id="testimonios"></div>
+    <div class="modal-footer">
+      <a class="modal-action modal-close waves-effect waves-green btn-flat ">Cerrar</a>
+    </div>
   </div>
 
-</div>
-</div>
-<div class="modal-footer">
-  <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Cerrar</a>
-</div>
-</div>
+  <div id="modal1" class="modal">
 
-<!--Import jQuery before materialize.js-->
-<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-<script type="text/javascript" src="js/materialize.min.js"></script>
-<script type="text/javascript" src="js/app.js"></script>
+    <div class="modal-content">
 
-<script>
-  $(document).ready(function () {
-    $('select').material_select();
-    $('.modal').modal();
-  });
-</script>
-<script>
-  $('.button-collapse').sideNav({
-    menuWidth: 300, // Default is 240
-    edge: 'left', // Choose the horizontal origin
-    closeOnClick: true, // Closes side-nav on <a> clicks, useful for Angular/Meteor
-    draggable: true // Choose whether you can drag to open on touch screens
-  });
-</script>
+      <form action="" id="frmEvaluar" name="frmEvaluar">
 
-<script>
+        <div class="row">
+
+          <div class="col s4 div-calificacion">
+
+            <span class="">Calificación: </span>
+
+          </div>
+
+          <div class="col s8 center-align valign-wrapper">
+
+            <a class="star onClickStar valign s1" rel="1"><i class="material-icons">star</i></a>
+
+            <a class="star onClickStar valign s2" rel="2"><i class="material-icons">star</i></a>
+
+            <a class="star onClickStar valign s3" rel="3"><i class="material-icons">star</i></a>
+
+            <a class="star onClickStar valign s4" rel="4"><i class="material-icons">star</i></a>
+
+            <a class="star onClickStar valign s5" rel="5"><i class="material-icons">star</i></a>
+
+            <input type="hidden" id="calificacion" name="calificacion" value="0" class="value" />
+
+            <!--<input type="number" name="calificacion" id="calificacion">-->
+
+          </div>
+
+          <div class="input-field col s12 div-exp">
+
+            <textarea name="testimonio" id="testimonio" cols="30" rows="10" class="materialize-textarea"></textarea>
+
+            <label for="testimonio">Describe tu experiencia</label>
+
+          </div>
+
+        </div>
+
+        <input type="hidden" id="id_negocio" name="id_negocio">
+
+        <input type="hidden" id="id_usuario" name="id_usuario">
+
+        <input type="hidden" id="id_requerimiento" name="id_requerimiento">
+
+      </form>
+
+    </div>
+
+    <div class="modal-footer">
+
+      <div class="row">
+
+        <div class="col s12">
+
+          <a class="modal-action waves-effect btn onEvaluar color-azul full-btn">Evaluar</a>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+
+  <!--Import jQuery before materialize.js-->
+
+  <script type="text/javascript" src="admin/assets/plugins/jquery/jquery-2.2.0.min.js"></script>
+
+  <script type="text/javascript" src="admin/assets/plugins/sweetalert/sweetalert.min.js"></script>
+
+  <script type="text/javascript" src="js/materialize.min.js"></script>
+
+  <script type="text/javascript" src="js/app.js"></script>
+
+  <script src="//cdnjs.cloudflare.com/ajax/libs/list.js/1.4.1/list.min.js"></script>
+
+
+
+  <script>
+    $(document).ready(function () {
+
+      $('select').material_select();
+
+      $('.modal').modal();
+
+    });
+  </script>
+
+
+
+  <script>
+    $(document).ready(function () {
+
+      $("a.onClickStar").click(function () {
+
+        $(this).addClass('active');
+
+        var parent = $(this).parent();
+
+        var index = parseInt($(this).attr("rel"));
+
+        $(parent).children().removeClass('active');
+
+        $(parent).children().each(function () {
+
+          if ($(this).hasClass("star") && parseInt($(this).attr("rel")) <= index) { $(this).addClass('active'); }
+
+          if ($(this).hasClass("value")) { $(this).val(index); }
+
+        });
+
+
+
+      });
+
+
+
+    });
+  </script>
+
+
+
+  <script>
+    checkSession();
+
     Customer.getFavoritos();
-</script>
+  </script>
+
 </body>
+
+
 
 </html>

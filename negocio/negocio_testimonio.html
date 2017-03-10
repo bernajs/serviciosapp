@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Detalle</title>
+    <meta charset="UTF-8">
+    <!--Import Google Icon Font-->
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">   
+    <meta http-equiv="Pragma" content="no-cache">   
+    <meta http-equiv="Expires" content="-1">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="../css/materialize.min.css" media="screen,projection" />
+    <link type="text/css" rel="stylesheet" href="../css/custom.css" media="screen,projection" />
+    <link type="text/css" rel="stylesheet" href="../admin/assets/plugins/sweetalert/sweetalert.css" media="screen,projection" />
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+        h5 {
+            margin-left: 0px !important;
+        }
+        .acciones {
+            margin-top: 15px !important;
+        }
+        
+        .rating {
+            width: 21px !important;
+        }
+        
+        .acciones i,
+        .acciones a {
+            color: dodgerblue !important;
+        }
+        
+        hr {
+            background-color: #E4E4E4 !important;
+            border: none;
+            height: 1px;
+        }
+        
+        .li {
+            position: relative;
+        }
+        
+        .li i {
+            left: 0;
+        }
+        
+        .li span {
+            position: absolute !important;
+            margin-top: 3px !important;
+            margin-left: 10px !important;
+        }
+        
+        .div-calificacion {
+            margin-top: 3px !important;
+        }
+        
+        .div-exp {
+            margin-top: 40px !important;
+        }
+        .container{
+            width: 85% !important;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col s12">
+                <div class="">
+                    <h5>Testimoniales</h5>
+                </div>
+            </div>
+        </div>
+        <div class="row txt-gris-claro" id="testimonios"></div>
+    </div>
+    <!-- Modal Structure -->
+    <!--Import jQuery before materialize.js-->
+    <script type="text/javascript " src="../admin/assets/plugins/jquery/jquery-2.2.0.min.js "></script>
+    <script type="text/javascript" src="../admin/assets/plugins/sweetalert/sweetalert.min.js"></script>
+    <script type="text/javascript " src="../js/materialize.min.js "></script>
+    <script type="text/javascript " src="js/app.js "></script>
+    <script>
+        $('.button-collapse').sideNav({
+            menuWidth: 300, // Default is 240
+            edge: 'left', // Choose the horizontal origin
+            closeOnClick: true, // Closes side-nav on <a> clicks, useful for Angular/Meteor
+            draggable: true // Choose whether you can drag to open on touch screens
+        });
+    </script>
+    <script>
+        $(document).ready(function (e) {
+            checkSession();
+            checkSuscripcion();
+            id = getUrlVars()["id"];
+            Negocio.testimonio();
+        });
+    </script>
+</body>
+
+</html>

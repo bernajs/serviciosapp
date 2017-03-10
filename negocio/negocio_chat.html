@@ -6,36 +6,96 @@
     <meta charset="UTF-8">
     <!--Import Google Icon Font-->
     <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="-1">
     <!--Import materialize.css-->
     <link type="text/css" rel="stylesheet" href="../css/materialize.min.css" media="screen,projection" />
-    <link type="text/css" rel="stylesheet" href="../css/custom.css" media="screen,projection" />
+    <link type="text/css" rel="stylesheet" href="css/custom.css" media="screen,projection" />
+    <link type="text/css" rel="stylesheet" href="../admin/assets/plugins/sweetalert/sweetalert.css" media="screen,projection"
+    />
 
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+        .right-align {
+            /*margin-left: 18vh !important;*/
+            float: right;
+        }
+        
+        .margint-10 {
+            margin-top: 50px !important;
+            margin-left: 15px !important;
+        }
+        
+        .share {
+            margin-top: 5px !important;
+            margin-left: 15px !important;
+        }
+        
+        .photo {
+            margin-top: 5px !important;
+            margin-right: 15px !important;
+            /*margin-left: 10px !important;*/
+        }
+        
+        .secondary-content {
+            float: right !important;
+            margin-top: 10px !important;
+            margin-right: 10px !important;
+        }
+        
+        .modal-footer {
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+        }
+        
+        .modal-content {
+            padding-top: 20px !important;
+        }
+        
+        h5 {
+            margin-left: 8%;
+            margin-top: 0px;
+            margin-bottom: 0px;
+        }
+        
+        .icon-ver {
+            float: right !important;
+        }
+        
+        img {
+            margin-left: 12px !important;
+        }
+        
+        .chat-input {
+            margin-left: 6% !important;
+        }
+        
+        .header-cliente {
+            border-left: .5px solid #95a5a6 !important;
+        }
+        
+        .caja-msj {
+            word-wrap: break-word;
+        }
+        
+        .icono {
+            float: right !important;
+            position: absolute !important;
+            top: 4px !important;
+        }
+    </style>
 </head>
 
 <body>
-    <ul id="slide-out" class="side-nav fixed">
-        <li><a href="servicios.html">Solicitar servicio</a></li>
-        <li><a href="cotizaciones.html">Cotizaciones (chat)</a></li>
-        <li><a href="favoritos.html">Favoritos</a></li>
-        <li><a href="historial.html">Historial (llamadas, mensajes)</a></li>
-        <li><a href="editar_perfil.html">Editar perfil</a></li>
-        <li><a href="agregar_direccion.html">Agregar direccion</a></li>
-        <li><a href="logout.html">Cerrar sesión</a></li>
-    </ul>
-    <a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a>
-
-    <a href="detalle.html">
-        <div class="row">
+    <div class="row header color-negro">
+        <a class="goto_negocio">
             <div class="col s12 mensaje-div">
-                <span><b>Ver información del proveedor</b>
-                <!--<i class="material-icons">label</i>-->
+                <span class="txt-blanco"><b>Ver información del usuario</b></span>
                 <br>
-                Servicio: Plomería</span>
+                <!--<span class="txt-blanco">Servicio:</span> <span class="txt-blanco nombre_servicio"></span>-->
             </div>
-        </div>
-    </a>
+        </a>
+    </div>
     <div class="container">
 
         <div class="row chat">
@@ -43,28 +103,35 @@
 
         <div class="msj">
             <div class="row chat-share">
-                <div class="col s1">
-                    <i class="material-icons">share</i>
+                <!--<div class="col s1 share onClickGetCompartir">
+                    <a class=""> <i class="material-icons txt-azul">share</i></a>
                 </div>
-                <div class="col s6  offset-s1 chat-input">
-                    <input type="text" id="message">
+                <div class="col s1 photo">
+                    <i class="material-icons txt-azul">photo</i>
+                </div>-->
+                <div class="col s8 chat-input">
+                    <input id="message" type="text" class="" placeholder="Escribir mensaje" style="border:none !important">
                 </div>
                 <div class="col s1 chat-btn">
-                    <a class="btn onClickEnviar">Enviar</a>
+                    <a class="onClickEnviar txt-azul">Enviar</a>
                 </div>
             </div>
         </div>
     </div>
-    <!--FAB-->
-
     <!--Import jQuery before materialize.js-->
-    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="../admin/assets/plugins/jquery/jquery-2.2.0.min.js"></script>
+    <script type="text/javascript" src="../admin/assets/plugins/sweetalert/sweetalert.min.js"></script>
     <script type="text/javascript" src="../js/materialize.min.js"></script>
     <script type="text/javascript" src="js/app.js"></script>
+
     <script>
         $(document).ready(function () {
-            checkSession();
             Negocio.getChat();
+            checkSuscripcion();
+            checkSession();
+            $('#message').click(function () {
+                $('html,body').delay(500).animate({ scrollTop: document.body.scrollHeight }, 2000);
+            });
         });
     </script>
 </body>

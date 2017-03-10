@@ -1,0 +1,14 @@
+{
+    "_readMe": "Review list of sync operations, then use Ftp-sync: Commit command to accept changes",
+    "_warning": "This file should not be saved, reopened review file won't work!",
+    "filesToUpdate": [
+        "negocio/negocio_chat.html",
+        "negocio/js/app.js"
+    ],
+    "filesToAdd": [],
+    "dirsToAdd": [],
+    "filesToRemove": [],
+    "dirsToRemove": [
+        "fbook"
+    ]
+}

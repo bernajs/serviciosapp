@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Cotizaciones</title>
+    <meta charset="UTF-8">
+    <!--Import Google Icon Font-->
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="-1">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="../css/materialize.min.css" media="screen,projection" />
+    <link type="text/css" rel="stylesheet" href="css/custom.css" media="screen,projection" />
+    <link type="text/css" rel="stylesheet" href="../admin/assets/plugins/sweetalert/sweetalert.css" media="screen,projection"
+    />
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+        a {
+            color: black !important;
+        }
+        
+        .titulo {
+            font-size: 20px !important;
+        }
+        /*.img {
+            height: 144px !important;
+        }*/
+        /*img {
+            overflow: hidden!important;
+            height: 100px !important;
+            width: 100px !important;
+        }*/
+        
+        .container {
+            width: 85% !important;
+        }
+        
+        .flex-box {
+            display: flex !important;
+            flex-wrap: wrap !important;
+            /*flex-direction: row !important;*/
+            justify-content: space-between !important;
+            align-items: center !important;
+        }
+        
+        .img {
+            /*display: flex;
+            padding: 0.5em;
+            width: 50%;*/
+            width: 50%;
+            height: 25%;
+            object-fit: contain !important;
+        }
+        
+        .grid {
+            width: 100%;
+            font-size: 0;
+            border: #7f8c8d solid 1px;
+            max-width: 640px;
+        }
+        
+        .grid .box {
+            width: 50%;
+            display: inline-block;
+            min-height: 200px;
+            vertical-align: top;
+            border: white solid 5px;
+        }
+        
+        .grid .box img {
+            width: 100%;
+            text-align: center;
+        }
+        
+        .material-placeholder {
+            display: inline !important;
+        }
+        
+        * {
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col s12">
+                <h6 class="titulo">Detalle de la cotización</h6>
+            </div>
+            <div class="col s12">
+                <h6 class="detalle"></h6>
+                <hr>
+                <h6 class="fecha txt-gris-claro">Fecha: </h6>
+            </div>
+            <div class="col s12">
+                <h6 class="titulo">Imágenes</h6>
+            </div>
+            <hr>
+        </div>
+        <div class="grid"></div>
+    </div>
+    <!--Import jQuery before materialize.js-->
+    <script type="text/javascript" src="../admin/assets/plugins/jquery/jquery-2.2.0.min.js"></script>
+    <script type="text/javascript" src="../admin/assets/plugins/sweetalert/sweetalert.min.js"></script>
+    <script type="text/javascript" src="../js/materialize.min.js"></script>
+    <script type="text/javascript" src="js/app.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('.modal').modal();
+        });
+    </script>
+    <script>
+        Negocio.cotizacionDetalle();
+    </script>
+</body>
+
+</html>

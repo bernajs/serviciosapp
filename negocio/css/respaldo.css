@@ -1,0 +1,165 @@
+/*General*/
+
+li {
+    list-style: none !important;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+.border {
+    padding-bottom: 10px;
+    border-bottom: solid 1px;
+}
+
+.detalle {
+    margin-top: 20px;
+}
+
+h6 {
+    color: blue;
+}
+
+.card-action {
+    padding: 0px !important;
+}
+
+.img-cotizacion {
+    height: 20vh !important;
+    width: 20vh !important;
+    background-size: cover;
+    display: block;
+    margin: auto;
+}
+
+.btn-evaluar {
+    margin-top: 20px;
+}
+
+.input-field-label {
+    top: 2rem !important;
+}
+
+.txtarea .active {
+    /*transform: translateY(-160%) !important;*/
+    /*padding: 0px 0px !important;*/
+}
+
+textarea {
+    padding: 10px 0px 0px 0px !important;
+}
+
+textarea .active {
+    padding: 0px 0px !important;
+}
+
+label {
+    left: 1rem !important;
+}
+
+b {
+    /*margin: 0px 4px !important;*/
+}
+
+p {
+    margin-top: 0px !important;
+    /*margin-bottom: 0px !important;*/
+    /*margin: 3px 0px !important;*/
+}
+
+.border-negocio {
+    margin-bottom: 10px !important;
+}
+
+.row {
+    margin-bottom: 0px !important;
+}
+
+.mensaje-div {
+    background-color: black;
+    padding: 10px 0px 10px 20px !important;
+}
+
+.buscar-blue {
+    background-color: black;
+    padding-bottom: 10px;
+    margin-bottom: 20px !important;
+}
+
+.buscar {
+    background-color: white;
+    border-radius: 5px;
+}
+
+.buscar input {
+    margin: 0px;
+    border-bottom: none !important;
+}
+
+.buscar .active {
+    transform: translateY(-90%) !important;
+}
+
+.msj {
+    position: fixed;
+    left: 0px;
+    bottom: 0px;
+    width: 100%;
+    background: #ECEFF1;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.chat-input {
+    background-color: white;
+    border-radius: 50px;
+}
+
+.chat-share i {
+    margin: 10px 0px 5px 15px !important;
+}
+
+.msj .col {}
+
+.chat-input input {
+    margin: 0px;
+    border-bottom: none;
+}
+
+.chat-btn a {
+    margin-top: 4px !important;
+    margin-left: 5px !important;
+    padding-left: 15px !important;
+}
+
+.container {
+    margin-top: 5% !important;
+}
+
+
+/*NEGOCIO.HTML*/
+
+.btn-negocio {
+    margin-top: 15px !important;
+}
+
+
+/*Perfil*/
+
+.titulo-direccion {
+    margin-bottom: 20px !important;
+}
+
+input {
+    /*margin-bottom: 0px !important;*/
+}
+
+.modal.modal-fixed-footer {
+    height: 100% !important;
+}
+
+.modal {
+    width: 95% !important;
+}

@@ -1,85 +1,114 @@
 <!DOCTYPE html>
+
 <html>
 
+
+
 <head>
+
   <title>Tipo cotización</title>
+
   <meta charset="UTF-8">
+
   <!--Import Google Icon Font-->
+
   <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="-1">
+
   <!--Import materialize.css-->
+
   <link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection" />
+
   <link type="text/css" rel="stylesheet" href="css/custom.css" media="screen,projection" />
 
+  <link type="text/css" rel="stylesheet" href="admin/assets/plugins/sweetalert/sweetalert.css" media="screen,projection" />
+
+
+
   <!--Let browser know website is optimized for mobile-->
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <style>
+    .llamada {
+      /*background-color: greenyellow !important;*/
+    }
+    
+    .cotizacion {
+      background-color: dodgerblue !important;
+      width: 100%;
+    }
+    
+    .card-action {
+      background-color: white !important;
+    }
+    
+    img {
+      /*margin: 30px 0px !important;*/
+      height: 55% !important;
+      width: 55% !important;
+    }
+    
+    .card-image {
+      height: 30vh !important;
+      padding-top: 1px !important;
+    }
+    
+    .row {
+      margin: 10px 5px !important;
+    }
+    
+    .card {
+      box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2) !important;
+    }
+
+    h5{
+      font-weight: bold !important;
+    }
+  </style>
+
 </head>
 
 <body>
-  <ul id="slide-out" class="side-nav fixed">
-    <li><a href="servicios.html">Solicitar servicio</a></li>
-    <li><a href="cotizaciones.html">Cotizaciones (chat)</a></li>
-    <li><a href="favoritos.html">Favoritos</a></li>
-    <li><a href="historial.html">Historial (llamadas, mensajes)</a></li>
-    <li><a href="editar_perfil.html">Editar perfil</a></li>
-    <li><a href="agregar_direccion.html">Agregar direccion</a></li>
-    <li><a href="logout.html">Cerrar sesión</a></li>
-  </ul>
-  <a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a>
-
-
   <div class="container">
-    <div class="row center-align">
-      <div class="col s12">
-        <div class="card">
-          <a onClick="tipo_cotizacion(1)">
-<div class="card-image img-cotizacion">
-  <img src="https://cdn1.iconfinder.com/data/icons/support-set/512/010_phone.png" alt="">
-</div>
-<div class="card-action">
-  <h4>Llamada</h4>
-</div>
-</a>
-</div>
-</div>
-</div>
-
-<div class="row center-align">
-  <div class="col s12">
-    <div class="card">
-      <a onClick="tipo_cotizacion(2)">
-<div class="card-image img-cotizacion">
-  <img src="https://cdn3.iconfinder.com/data/icons/simplius-pack/512/pencil_and_paper-512.png" alt="">
-</div>
-<div class="card-action">
-  <h4>Cotización</h4>
-</div>
-</a>
-</div>
-</div>
-</div>
-</div>
-
-<!--Import jQuery before materialize.js-->
-<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-<script type="text/javascript" src="js/materialize.min.js"></script>
-<script type="text/javascript" src="js/app.js"></script>
-
-<script>
-                  $(document).ready(function (e) {
-                    checkSession();
-                  });
-</script>
-<script>
-
-                  var id = getUrlVars()["id"];
-                  function tipo_cotizacion(tipo) {
-                    if (tipo == 1) {
-                      location.href = "llamada.html?id=" + id;
-                    } else if (tipo == 2) {
-                      location.href = "cotizar.html?id=" + id;
-                    }
-                  }
-</script>
+    <div class="row">
+      <div class="s12 center-align">
+        <a onClick="tipo_cotizacion(1)">
+          <img class="responsive-img circle" src="admin/assets/images/llamadas.png" alt="">
+        </a>
+        <h5>Llamada</h5>
+      </div>
+    </div>
+    <div class="row">
+      <div class="s12 center-align">
+        <a onClick="tipo_cotizacion(2)">
+          <img class="responsive-img circle" src="admin/assets/images/cotizacion.png" alt="">
+        </a>
+        <h5>Cotización</h5>
+      </div>
+    </div>
+  </div>
+  <!--Import jQuery before materialize.js-->
+  <script type="text/javascript" src="admin/assets/plugins/jquery/jquery-2.2.0.min.js"></script>
+  <script type="text/javascript" src="admin/assets/plugins/sweetalert/sweetalert.min.js"></script>
+  <script type="text/javascript" src="js/materialize.min.js"></script>
+  <script type="text/javascript" src="js/app.js"></script>
+  <script>
+                    $(document).ready(function (e) {
+                      checkSession();
+                    });
+  </script>
+  <script>
+    var id = getUrlVars()["id"];
+    function tipo_cotizacion(tipo) {
+      if (tipo == 1) {
+        location.href = "llamada.html?id=" + id;
+      } else if (tipo == 2) {
+        location.href = "cotizar.html?id=" + id;
+      }
+    }
+  </script>
 </body>
 
 </html>

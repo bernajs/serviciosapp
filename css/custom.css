@@ -1,12 +1,170 @@
 /*General*/
 
+
+/*COLORES*/
+
+.color-azul {
+    /*background-color: #2C8BEB !important;*/
+    background-color: #2C8BEB !important;
+}
+
+.color-blanco {
+    background-color: white !important;
+}
+
+.color-fb {
+    background-color: #3b5998 !important;
+}
+
+.color-tipografia {
+    color: #9E9E9E !important;
+}
+
+.color-azul-oscuro {
+    background-color: #004DB4 !important;
+}
+
+.color-verde {
+    background-color: #2ECC71 !important;
+}
+
+.color-negro {
+    background-color: #171717 !important;
+}
+
+.color-azul-claro {
+    background-color: #91C0E7 !important;
+}
+
+.color-amarillo {
+    background-color: #F3C46B !important;
+}
+
+.color-rojo {
+    background-color: #E74C3C !important;
+}
+
+.color-gris-claro {
+    background-color: #EFEFEF !important;
+}
+
+.txt-gris-claro {
+    color: #9E9E9E !important;
+}
+
+.txt-verde {
+    color: #2ECC71 !important;
+}
+
+.txt-negro {
+    color: black !important;
+}
+
+.txt-blanco {
+    color: white !important;
+}
+
+.txt-azul-oscuro {
+    color: #004DB4 !important;
+}
+
+.txt-azul {
+    color: #2C8BEB !important;
+}
+
+.txt-amarillo {
+    color: #F3C46B !important;
+}
+
+
+/*Estrellas evaluacion*/
+
+.rating {
+    width: 21px !important;
+}
+
+a.star {
+    width: 26px;
+    height: 26px;
+    display: inline-block;
+    margin-left: 1px;
+    margin-right: 1px;
+}
+
+a.star.active i {
+    color: #F5CA00;
+}
+
+a.star i {
+    font-size: 26px !important;
+    color: #666;
+}
+
+.picker__date-display {
+    background-color: #2C8BEB !important;
+}
+
+.picker__weekday-display {
+    background-color: #004DB4 !important;
+}
+
+.collection .collection-item.avatar {
+    min-height: 0px !important;
+}
+
+.tabs .tab a:hover,
+.tabs .tab a.active {
+    color: #2C8BEB !important;
+}
+
+.tabs .tab a {
+    color: #2C8BEB !important;
+}
+
+.tabs .tab a {
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+}
+
+.list,
+.collection {
+    border: none !important;
+}
+
+.collection-item {
+    border-bottom: 1px solid #E4E4E4 !important;
+}
+
+.acciones i,
+.acciones a {
+    color: dodgerblue !important;
+}
+
+span.badge.new:after {
+    content: "" !important;
+}
+
+span.badge.new {
+    margin-top: 20px !important;
+    margin-right: 20px !important;
+    min-width: 1.5rem !important;
+    border-radius: 10px !important;
+    font-weight: bold;
+}
+
+hr {
+    background-color: #E4E4E4 !important;
+    border: none;
+    height: 1px;
+}
+
 li {
     list-style: none !important;
 }
 
 a {
     text-decoration: none;
-    color: black;
+    /*color: black;*/
 }
 
 .border {
@@ -14,16 +172,60 @@ a {
     border-bottom: solid 1px;
 }
 
+.caret {
+    color: white !important;
+}
+
+.card {
+    box-shadow: none !important;
+}
+
 .detalle {
     margin-top: 20px;
 }
 
+.full-btn {
+    width: 100%;
+}
+
+.margint-10 {
+    margin-top: 20px !important;
+}
+
+.marginb-0 {
+    margin-bottom: 0px !important;
+}
+
+.marginb-20 {
+    margin-bottom: 20px !important;
+}
+
+.marginb-35 {
+    margin-bottom: 35px !important;
+}
+
+.margint-20 {
+    margin-top: 20px !important;
+}
+
+#data {
+    margin-top: 125px !important;
+}
+
+.resultados {
+    padding: 5px 4.2% !important;
+}
+
+.padding0 {
+    padding: 0px !important;
+}
+
 h6 {
-    color: blue;
+    /*color: blue;*/
 }
 
 .card-action {
-    padding: 0px !important;
+    padding: 5px !important;
 }
 
 .img-cotizacion {
@@ -38,9 +240,29 @@ h6 {
     margin-top: 20px;
 }
 
-.input-field-label {
-    top: 2rem !important;
+.paddingl-0 {
+    padding-left: 0px !important;
 }
+
+
+/*.li .negocio-icon {
+    left: 0;
+    margin-top: 10px !important;
+}*/
+
+.li .negocio-detalle {
+    /*margin-top:12px !important;*/
+    margin-left: 20px !important;
+}
+
+.negocio-detalles li {
+    margin-bottom: 20px !important;
+}
+
+
+/*.input-field-label {
+    top: 2rem !important;
+}*/
 
 .txtarea .active {
     /*transform: translateY(-160%) !important;*/
@@ -78,24 +300,31 @@ p {
 }
 
 .mensaje-div {
-    background-color: #1688e5;
     padding: 10px 0px 10px 20px !important;
 }
 
 .buscar-blue {
-    background-color: #1688e5;
-    padding-bottom: 10px;
-    margin-bottom: 20px !important;
+    /*background-color: #2C8BEB;*/
+    padding-bottom: 15px;
+    margin-bottom: 0px !important;
 }
 
 .buscar {
     background-color: white;
-    border-radius: 5px;
+    padding-left: 2px !important;
+    padding-top: 1px !important;
+    margin-left: 4.2% !important;
+    height: 2.3rem !important;
+    /*border-radius: 5px;*/
 }
 
 .buscar input {
+    height: 2.3rem !important;
     margin: 0px;
     border-bottom: none !important;
+    background: url(../admin/assets/images/search.png) no-repeat scroll;
+    background-size: 30px 30px;
+    padding-left: 30px;
 }
 
 .buscar .active {
@@ -107,31 +336,65 @@ p {
     left: 0px;
     bottom: 0px;
     width: 100%;
-    background: #ECEFF1;
+    background-color: #f7f7f7 !important;
     padding-top: 5px;
     padding-bottom: 5px;
 }
 
+.header {
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    z-index: 99;
+    /*padding-top: 5px;
+    padding-bottom: 5px;*/
+}
+
+.footer {
+    position: fixed;
+    left: 0px;
+    bottom: 30px;
+    width: 100%;
+    z-index: 99;
+    /*padding-top: 5px;
+    padding-bottom: 5px;*/
+}
+
 .chat-input {
     background-color: white;
-    border-radius: 50px;
+    height: 2.5rem !important;
+    border-radius: 5px;
 }
 
 .chat-share i {
-    margin: 10px 0px 5px 15px !important;
+    /*margin: 10px 0px 5px 15px !important;*/
 }
 
-.msj .col {}
+.caja-msj {
+    padding: 5px 10px !important;
+}
 
 .chat-input input {
     margin: 0px;
     border-bottom: none;
+    height: 2.5rem !important;
 }
 
 .chat-btn a {
     margin-top: 4px !important;
     margin-left: 5px !important;
     padding-left: 15px !important;
+}
+
+.chat-btn {
+    margin-top: 8px !important;
+    padding-right: 0px !important;
+    padding-left: 5px !important;
+}
+
+.chat {
+    margin-bottom: 53px !important;
 }
 
 .container {
@@ -152,14 +415,33 @@ p {
     margin-bottom: 20px !important;
 }
 
-input {
-    /*margin-bottom: 0px !important;*/
-}
-
-.modal.modal-fixed-footer{
+.modal.modal-fixed-footer {
     height: 100% !important;
 }
 
-.modal{
+.modal {
     width: 95% !important;
 }
+
+.modal-content {
+    padding-top: 50px !important;
+    padding-bottom: 20px !important;
+    margin-bottom: 20px !important;
+}
+
+.page-title h5 {
+    margin-left: 20px !important;
+}
+
+/*Oculta el dia del datepicker*/
+.picker__date-display {
+    display: none !important;
+}
+
+
+/*Llamada.html*/
+
+
+/*.select .input-field {
+    margin-top: 0px !important;
+}*/

@@ -1,0 +1,18 @@
+{
+    "_readMe": "Review list of sync operations, then use Ftp-sync: Commit command to accept changes",
+    "_warning": "This file should not be saved, reopened review file won't work!",
+    "filesToUpdate": [
+        "chatmio.html",
+        "js/app.js",
+        "js/upload.js"
+    ],
+    "filesToAdd": [
+    ],
+    "dirsToAdd": [],
+    "filesToRemove": [
+        "tmp/b2ac3758e4176a9606b7e01a2f11c200.jpg"
+    ],
+    "dirsToRemove": [
+        "fbook"
+    ]
+}

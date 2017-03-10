@@ -1,124 +1,180 @@
-<!--<?php
-require_once("admin/_class/class.usuario.php");
-require_once("admin/_class/class.ciudad.php");
-include_once("_inc/inc.head.php");
-$obj = new Usuario();
-$id = $_GET['id'];
-// Obtiene los campos de la direccion
-$direccion = $obj->getDireccion($id);
-$direccion = $direccion[0]['direccion'];
-$id = $_GET['id'];
-$object = $obj->getdireccion($id);
-$info = json_decode($object[0]['direccion'], true);
-$data['calle'] = $info['calle'];
-$data['ciudad'] = $info['ciudad'];
-$data['estado'] = $info['estado'];
-$data['municipio'] = $info['municipio'];
-$data['cp'] = $info['cp'];
-$data['pais'] = $info['pais'];
-
-// Obtiene la lista de ciudadess
-$objCiudad = new Ciudad;
-$ciudades = $objCiudad->getCiudades();
-$lista_ciudades;
-foreach ($ciudades as $ciudad) {
-    if ($data['ciudad'] != $ciudad['ciudad']) {
-        $lista_ciudades .= '<option value="'.$ciudad['ciudad'].'">'.$ciudad['ciudad'].'</option>';
-    } else {
-        $lista_ciudades .= '<option value="'.$ciudad['ciudad'].'" selected>'.$ciudad['ciudad'].'</option>';
-    }
-}
-?>-->
 <!DOCTYPE html>
+
 <html>
 
+
+
 <head>
+
   <title>Agregar dirección</title>
+
   <meta charset="UTF-8">
+
   <!--Import Google Icon Font-->
-  <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+  <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">   
+  <meta http-equiv="Pragma" content="no-cache">   
+  <meta http-equiv="Expires" content="-1">
+
   <!--Import materialize.css-->
+
   <link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection" />
+
   <link type="text/css" rel="stylesheet" href="css/custom.css" media="screen,projection" />
 
+  <link type="text/css" rel="stylesheet" href="admin/assets/plugins/sweetalert/sweetalert.css" media="screen,projection" />
+
+
+
   <!--Let browser know website is optimized for mobile-->
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <style>
+
+    .onBorrarDireccion {
+
+      color: red !important;
+
+    }
+    .container{
+      width: 85% !important;
+    }
+
+  </style>
 
 </head>
 
+
+
 <body>
 
-  <ul id="slide-out" class="side-nav fixed">
-    <li><a href="servicios.html">Solicitar servicio</a></li>
-    <li><a href="cotizaciones.html">Cotizaciones (chat)</a></li>
-    <li><a href="favoritos.html">Favoritos</a></li>
-    <li><a href="historial.html">Historial (llamadas, mensajes)</a></li>
-    <li><a href="editar_perfil.html">Editar perfil</a></li>
-    <li><a href="agregar_direccion.html">Agregar direccion</a></li>
-    <li><a href="logout.html">Cerrar sesión</a></li>
-  </ul>
-  <a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a>
-
-
   <div class="container">
+
     <div class="row">
+
       <form action="" id="frmDireccion" name="frmDireccion" class="col s12">
+
         <h5>Dirección</h5>
+
         <div class="row" style="margin-bottom:0px;">
-<div class="input-field col s12">
-  <input id="calle" name="calle" type="text" value="" class="validate">
-  <label for="calle" class="lbl-active">Calle</label>
-</div>
-<div class="input-field col s12">
-  <input id="colonia" name="colonia" type="text" value="" class="validate">
-  <label for="colonia" class="lbl-active">Colonia</label>
-</div>
-<div class="input-field col s12">
-  <select id="id_ciudad" name="id_ciudad">
+
+          <div class="input-field col s12">
+
+            <input id="calle" name="calle" type="text" value="" class="validate">
+
+            <label for="calle" class="lbl-active">Calle</label>
+
+          </div>
+
+          <div class="input-field col s12">
+
+            <input id="colonia" name="colonia" type="text" value="" class="validate">
+
+            <label for="colonia" class="lbl-active">Colonia</label>
+
+          </div>
+
+          <div class="input-field col s12">
+
+            <select id="id_ciudad" name="id_ciudad">
+
             </select>
-  <label>Seleccione su ciudad</label>
-</div>
-<div class="input-field col s12">
-  <input id="estado" name="estado" type="text" value="" class="validate">
-  <label for="estado" class="lbl-active">Estado</label>
-</div>
-<div class="input-field col s12">
-  <input id="municipio" name="municipio" type="text" value="" class="validate">
-  <label for="municipio" class="lbl-active">Municipio</label>
-</div>
-<div class="input-field col s12">
-  <input id="cp" name="cp" type="number" value="" class="validate">
-  <label for="cp" class="lbl-active">C.P.</label>
-</div>
-</div>
-<input id="id_direccion" name="id_direccion" type="hidden" value="">
-<div class="row center-align">
-  <div class="col s11">
-    <a class="waves-light waves-effect btn blue col-s11 onActualizarDireccion">Guardar</a>
+
+            <label>Seleccione su ciudad</label>
+
+          </div>
+
+          <div class="input-field col s12">
+
+            <input id="estado" name="estado" type="text" value="" class="validate">
+
+            <label for="estado" class="lbl-active">Estado</label>
+
+          </div>
+
+          <div class="input-field col s12">
+
+            <input id="municipio" name="municipio" type="text" value="" class="validate">
+
+            <label for="municipio" class="lbl-active">Municipio</label>
+
+          </div>
+
+          <div class="input-field col s12">
+
+            <input id="cp" name="cp" type="number" value="" class="validate">
+
+            <label for="cp" class="lbl-active">C.P.</label>
+
+          </div>
+
+        </div>
+
+        <input id="id_direccion" name="id_direccion" type="hidden" value="">
+
+        <div class="row center-align">
+
+          <div class="col s12">
+
+            <a class="waves-light waves-effect btn blue full-btn onActualizarDireccion">Guardar</a>
+
+          </div>
+
+          <div class="col s12 margint-20 marginb-20">
+
+            <a class="onBorrarDireccion">Borrar dirección</a>
+
+          </div>
+
+        </div>
+
+      </form>
+
+    </div>
+
   </div>
-</div>
-</form>
-</div>
-</div>
 
-<!--Import jQuery before materialize.js-->
-<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-<script type="text/javascript" src="js/materialize.min.js"></script>
-<script type="text/javascript" src="js/app.js"></script>
 
-<script>
-  $(document).ready(function () {
-    $('select').material_select();
-  });
-</script>
 
-<script>
-  $(document).ready(function (e) {
-    checkSession();
-    var id = getUrlVars()["id"];
-    Customer.getDireccion(id);
-  });
-</script>
+  <!--Import jQuery before materialize.js-->
+
+  <script type="text/javascript" src="admin/assets/plugins/jquery/jquery-2.2.0.min.js"></script>
+
+  <script type="text/javascript" src="admin/assets/plugins/sweetalert/sweetalert.min.js"></script>
+
+  <script type="text/javascript" src="js/materialize.min.js"></script>
+
+  <script type="text/javascript" src="js/app.js"></script>
+
+  <script>
+
+    $(document).ready(function () {
+
+      $('select').material_select();
+
+    });
+
+  </script>
+
+
+
+  <script>
+
+    $(document).ready(function (e) {
+
+      checkSession();
+
+      var id = getUrlVars()["id"];
+
+      Customer.getDireccion(id);
+
+    });
+
+  </script>
+
 </body>
+
+
 
 </html>

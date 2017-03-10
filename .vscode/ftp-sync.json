@@ -12,8 +12,12 @@
     "ignore": [
         "\\.vscode",
         "\\_composer",
-        "\\assets",   
+        "\\images",   
+        "\\plugins",   
+        "\\pages",   
         "\\back01",   
+        "\\tmp",   
+        "\\uploads",   
         "\\.git"
     ]
 }

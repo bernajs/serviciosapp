@@ -206,9 +206,9 @@ case "recover":
     $data = $_POST['data'];
     $email = $obj->isValidEmail($data['e']);
     if($email){
-        $code = $email[0]['id'].'.'.md5(date("Ymdhis"));
-        $notify_data = ['code' => $code];
-        $objNotify->send("recuperar-contrasena",$notify_data,$email[0]['correo']);
+        // $code = $email[0]['id'].'.'.md5(date("Ymdhis"));
+        // $notify_data = ['code' => $code];
+        // $objNotify->send("recuperar-contrasena",$notify_data,$email[0]['correo']);
         $result['status'] = 202;
 }else{
     $result['status'] = 404;

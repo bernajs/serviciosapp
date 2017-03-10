@@ -5,51 +5,60 @@
   <title>Servicios</title>
   <meta charset="UTF-8">
   <!--Import Google Icon Font-->
-  <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">   
+  <meta http-equiv="Pragma" content="no-cache">   
+  <meta http-equiv="Expires" content="-1">
   <!--Import materialize.css-->
   <link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection" />
   <link type="text/css" rel="stylesheet" href="css/custom.css" media="screen,projection" />
-
+  <link type="text/css" rel="stylesheet" href="admin/assets/plugins/sweetalert/sweetalert.css" media="screen,projection" />
   <!--Let browser know website is optimized for mobile-->
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
+  <style>
+    /*.servicio{
+    background-color: white !important;
+  }*/
+    
+    body {
+      background-color: #f7f7f7 !important;
+    }
+    
+    .card {
+      height: 100% !important;
+      width: 100% !important;
+      /*margin-bottom: 20px !important;*/
+      margin-right: auto !important;
+    }
+    
+    img {
+      height: 85% !important;
+      width: 85% !important;
+      margin-left: 15px !important;
+    }
+    .container{
+      width: 86% !important;
+      margin-top: 7% !important;
+    }
+  </style>
 </head>
 
 <body>
-
-  <ul id="slide-out" class="side-nav fixed">
-    <li><a href="servicios.html">Solicitar servicio</a></li>
-    <li><a href="cotizaciones.html">Cotizaciones (chat)</a></li>
-    <li><a href="favoritos.html">Favoritos</a></li>
-    <li><a href="historial.html">Historial (llamadas, mensajes)</a></li>
-    <li><a href="editar_perfil.html">Editar perfil</a></li>
-    <li><a href="agregar_direccion.html">Agregar direccion</a></li>
-    <li><a href="logout.html">Cerrar sesión</a></li>
-  </ul>
-  <a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a>
-
   <div class="container">
-    <div id="data" class="row center-align">
-      <!--<?php echo $lista_servicios ?>-->
+    <div class="row center-align lista-servicios">
     </div>
   </div>
-  <!--FAB-->
-  <div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
-<a class="btn-floating btn-large blue">
-  <i class="large material-icons">chat</i>
-</a>
-</div>
-
-<!--Import jQuery before materialize.js-->
-<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-<script type="text/javascript" src="js/materialize.min.js"></script>
-<script type="text/javascript" src="js/app.js"></script>
+  <!--Import jQuery before materialize.js-->
+  <script type="text/javascript" src="admin/assets/plugins/jquery/jquery-2.2.0.min.js"></script>
+  <script type="text/javascript" src="admin/assets/plugins/sweetalert/sweetalert.min.js"></script>
+  <script type="text/javascript" src="js/materialize.min.js"></script>
+  <script type="text/javascript" src="js/app.js"></script>
 </body>
 <script>
-    $(document).ready(function (e) {
-      checkSession();
-      Customer.getServicios();
-    });
-  </script>
+  $(document).ready(function (e) {
+    checkSession();
+    Customer.getServicios();
+  });
+
+</script>
 
 </html>
