@@ -200,8 +200,6 @@ Customer = {
                             exec: "compartir",
                             data: data
                         }, function (r) {
-
-
                         });
                 });
             }
