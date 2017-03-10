@@ -278,7 +278,6 @@ if(isset($_GET['id'])){
     </div>
 </div>
 
-
 <!-- MODAL FORM -->
 <div id="modal_form" class="modal"></div>
 
@@ -305,7 +304,6 @@ if(isset($_GET['id'])){
             location.reload();
         });
         myDropzone.on('sending', function (file, xhr, formData) {
-            formData.append('nid', <?php echo $id ?>);
         });
     });
 
